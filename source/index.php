@@ -29,8 +29,6 @@ require CORE_ROOT . 'app.php';
 init_var();
 init_env();
 
-require_once CORE_ROOT . 'BasicModel.php'; // 似乎可以到autoloader里面去
-
 $user_lib_file = APP_ROOT . 'lib' . DS . 'function.php';
 if (file_exists($user_lib_file))
     require_once $user_lib_file;

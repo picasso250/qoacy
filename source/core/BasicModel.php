@@ -1,7 +1,5 @@
 <?php
 
-require_once CORE_ROOT . 'Searcher.php';
-
 /**
  * @author ryan
  */
@@ -28,13 +26,13 @@ class BasicModel
 
     public static function create($info = array())
     {
-        $b = array_map(function ($key) {
+        $exps = array_map(function ($key) {
             if (strpos($key, '=') === false)
                 return "$key=?";
             else
                 return $key;
         }, array_keys($info));
-        $str = implode(',', $b);
+        $str = implode(',', $exps);
         $values = self::notNull($info);
         $values = array_map(function ($v) { // is there any where else need this transaction? update? find?
             if (is_object($v) && is_a($v, 'BasicModel')) {
@@ -97,19 +95,18 @@ class BasicModel
         if($value !== null) { // given by key => value
             $data = array("$a=?" => $value);
         } else {
-            $b = array_map(function ($key) {
+            $exps = array_map(function ($key) {
                 if (strpos($key, '=') === false)
                     return "$key=?";
                 else
                     return $key;
             }, array_keys($a));
-            $str = implode(',', $b);
+            $str = implode(',', $exps);
             $values = self::notNull($a);
             $data = array($str => $values);
         }
-        $self = get_called_class();
-        Sdb::update($data, $self::table(), $this->selfCond()); // why we need that? that doesn't make any sense
-        $this->info = $this->info(); // refresh data
+        Sdb::update($data, self::table(), $this->selfCond()); // why we need that? that doesn't make any sense
+        $this->info = $this->info(); // refresh data. ineffitioncy!!!
     }
 
     public function __get($name) 
@@ -118,26 +115,25 @@ class BasicModel
         if (empty($this->info))
             $this->info = $this->info();
         $info = $this->info;
-        if (is_bool($info)) {
-            d($info);
+        if ($info === false) {
             throw new Exception("info empty, maybe because you have no id: $this->id in " . get_called_class());
         }
-        if (!array_key_exists($name, $this->info)) {
-            d($this->info);
+        if (!array_key_exists($name, $info)) {
+            d($info);
             throw new Exception("no '$name' when get in class " . get_called_class());
         }
-        return $this->info[$name];
+        return $info[$name];
     }
 
     public function __call($name, $args)
     {
-        if (empty($this->info)) {
+        if (!($this->info))
             $this->info = $this->info();
-        }
+        $info = $this->info;
         $prop = camel2under($name);
-        if (isset($this->info[$prop])) {
+        if (isset($info[$prop])) {
             $class = ucfirst($name);
-            return new $class($this->info[$prop]);
+            return new $class($info[$prop]);
         } else {
             throw new Exception("no $prop when call $name", 1);
         }
