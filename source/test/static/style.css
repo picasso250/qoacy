@@ -1,0 +1,38 @@
+.pass, .fail {
+    font-family: 'Proxima Nova Regular', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+.pass {
+    background-color: green;
+    color: white;
+}
+.fail {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+.conclusion {
+    font-size: xx-large;
+    clear: both;
+}
+
+h1, h2, ol {
+    margin: 0;
+    font-family: "Skolar Bold","Times New Roman",serif;
+}
+hr {
+    margin: 1px;
+    clear: both;
+}
+.clear.btn {
+    float: right;
+    display: block;
+    padding: 5px;
+}
+h1 {
+    float: left;
+}
+h2 {
+    font-size: large;
+    font-weight: 
+}

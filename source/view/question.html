@@ -1,0 +1,16 @@
+<?php
+!defined('IN_APP') && exit('ILLEGAL EXECUTION');
+/**
+ * @author  ryan <cumt.xiaochi@gmail.com>
+ */
+?>
+<h1><?php echo htmlspecialchars($question->title) ?></h1>
+<ul>
+  <?php foreach ($answers as $a): ?>
+    <li><?php echo $a->content ?></li>
+  <?php endforeach ?>
+</ul>
+<form action="/answer_question/<?php echo $question->id ?>" method="post">
+  <textarea name="content"></textarea>
+  <button>Submit</button>
+</form>

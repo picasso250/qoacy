@@ -1,0 +1,12 @@
+<?php
+!defined('IN_APP') && exit('ILLEGAL EXECUTION');
+/**
+ * @author  ryan <cumt.xiaochi@gmail.com>
+ */
+?>
+<div>search result for <?php echo htmlspecialchars($q); ?></div>
+<h1>ask a question</h1>
+<form action="/ask_question" method="post" class="">
+	<input name="title" type="text" value="<?php echo $q ?>">
+    <button class="btn" type="submit">Ask</button>
+</form>

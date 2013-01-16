@@ -1,0 +1,31 @@
+<?php
+!defined('IN_APP') && exit('ILLEGAL EXECUTION');
+/**
+ * @author  ryan <cumt.xiaochi@gmail.com>
+ */
+$controller = $GLOBALS['controller'];
+?>
+<div class="masthead">
+  <ul class="nav nav-pills pull-right">
+    <?php if (!$GLOBALS['has_login']): ?>
+      <li><a href="<?= ROOT ?>register">注册</a></li>
+      <li><a href="<?= ROOT ?>login">登录</a></li>
+    <?php else: ?>
+      <?php $user = $GLOBALS['user'] ?>
+      <li class="dropdown">
+        <a class="dropdown-toggle"
+           data-toggle="dropdown"
+           href="#">
+            <?= htmlspecialchars($user->name) ?>
+            <b class="caret"></b>
+          </a>
+        <ul class="dropdown-menu">
+          <li><a href="<?= ROOT ?>my">账户设置</a></li>
+          <li><a href="<?= ROOT ?>mywiki">我的 xshopy</a></li>
+          <li><a href="<?= ROOT ?>logout">退出</a></li>
+        </ul>
+      </li>
+    <?php endif ?>
+  </ul>
+  <h3 class="muted"><a href="<?= ROOT ?>"><?= $GLOBALS['config']['site']['name'] ?></a></h3>
+</div>

@@ -1,0 +1,32 @@
+<?php
+!defined('IN_APP') && exit('ILLEGAL EXECUTION');
+/**
+ * @author  ryan <cumt.xiaochi@gmail.com>
+ */
+if (!isset($fieldName))
+    $fieldName = 'type';
+$cur_value = i($GLOBALS[$fieldName]);
+if (!isset($defaultValue))
+    $defaultValue = '';
+if (!isset($defaultText))
+    $defaultText = '全部';
+if (!isset($data)) {
+    $data = $GLOBALS[$fieldName . 's'];
+}
+if (!isset($withShell))
+    $withShell = true;
+?>
+<?php if ($withShell): ?>
+    <select name="<?= $fieldName ?>" class="<?= i($class) ?>">
+<?php endif ?>
+
+    <?php if (!isset($noDefault) || !$noDefault): ?>
+        <option value="<?= $defaultValue ?>" <?= $cur_value == 'all' ? 'selected' : '' ?> ><?= $defaultText ?></option>
+    <?php endif ?>
+    <?php foreach ($data as $key => $value): ?>
+        <option value="<?= $key ?>" <?= $cur_value == $key ? 'selected' : '' ?> ><?= $value ?></option>
+    <?php endforeach ?>
+    
+<?php if ($withShell): ?>
+    </select>
+<?php endif ?>
