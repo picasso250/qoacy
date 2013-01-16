@@ -79,24 +79,29 @@ function execute_logic()
         require_once $init_file;
     }
 
-    $init_function_name = '_init';
-    if (function_exists($init_function_name)) {
-        call_user_func($init_function_name);
+    $init_func = '_init';
+    if (function_exists($init_func)) {
+        call_user_func($init_func);
     }
-    $init_function_name .= '_'.$method;
-    if (function_exists($init_function_name)) {
-        call_user_func($init_function_name);
+    $init_func .= '_'.$method;
+    if (function_exists($init_func)) {
+        call_user_func($init_func);
     }
 
     if (isset($matches))
         array_shift($matches);
     require_once AppFile::controller($controller);
-    if (function_exists($controller)) {
+    $init_func = $controller.'_init';
+    if (function_exists($init_func))
+        call_user_func($init_func);
+    if (function_exists($controller))
         call_user_func($controller);
-    }
     $method_func = $controller.'_'.$method;
     if (function_exists($method_func))
         call_user_func_array($method_func, $matches);
+    $end_func = $controller.'_end';
+    if (function_exists($end_func))
+        call_user_func($end_func);
 }
 
 function render_view($view_file, $opts = array())

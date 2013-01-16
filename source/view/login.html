@@ -1,0 +1,29 @@
+<?php
+!defined('IN_APP') && exit('ILLEGAL EXECUTION');
+/**
+ * @author  ryan <cumt.xiaochi@gmail.com>
+ */
+?>
+<form action="<?= ROOT ?>login" method="post" class="form-horizontal">
+  <?php if (isset($msg) && $msg): ?>
+    <div class="alert alert-error"><?= $msg ?></div>
+  <?php endif ?>
+  <input type="hidden" name="back" value="<?= _req('back') ?>">
+  <div class="control-group">
+    <label class="control-label" for="inputUsername">邮箱：</label>
+    <div class="controls">
+      <input type="text" name="username" id="inputUsername" placeholder="" value="<?= isset($username) ? $username : '' ?>" class="required">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputPassword">密码：</label>
+    <div class="controls">
+      <input type="password" name="password" id="inputPassword" placeholder="" class="required">
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-primary">登录</button>
+    </div>
+  </div>
+</form>

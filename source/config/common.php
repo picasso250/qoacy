@@ -25,7 +25,9 @@ $config['urls'] = array(
     '/search' => 'search',
     '/ask_question' => 'ask_question',
     '/question/(.+)' => 'question',
-    '/answer_question/(.+)' => 'answer_question');
+    '/answer_question/(.+)' => 'answer_question',
+    '/login' => 'login',
+    '/register' => 'register');
 
 // pages need login
 $config['login_page'] = array();
