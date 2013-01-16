@@ -4,10 +4,17 @@
  * @author  ryan <cumt.xiaochi@gmail.com>
  */
 ?>
-<a href=""></a>
 <form action="/search" class="form-search">
   <div class="input-append">
     <input type="text" name="q" placeholder="type a question to search" class="search-query">
     <button class="btn" type="submit">Search</button>
   </div>
 </form>
+<div>question list</div>
+<ul>
+  <?php foreach ($questions as $q): ?>
+  	<li>
+      <a href="/question/<?php echo $q->id; ?>"><?php echo $q->title; ?></a>
+    </li>
+  <?php endforeach ?>
+</ul>

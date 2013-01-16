@@ -13,7 +13,7 @@ function register_POST()
 	$email = _post('email');
 	$password = _post('password');
 	if ($email && $password) {
-		$user = User::created(compact('email', 'password'));
+		$user = User::create(compact('email', 'password'));
 		$user->login();
 		redirect();
 	}

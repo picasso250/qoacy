@@ -6,5 +6,6 @@
 
 function index_GET()
 {
-    render_view('master');
+	$questions = Question::search()->find();
+    render_view('master', compact('questions'));
 }

@@ -36,6 +36,13 @@ class BasicModel
         }, array_keys($info));
         $str = implode(',', $b);
         $values = self::notNull($info);
+        $values = array_map(function ($v) { // is there any where else need this transaction? update? find?
+            if (is_object($v) && is_a($v, 'BasicModel')) {
+                return $v->id;
+            } else {
+                return $v;
+            }
+        }, $values);
 
         $data = array($str => $values);
 

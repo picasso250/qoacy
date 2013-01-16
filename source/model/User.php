@@ -6,17 +6,25 @@
 
 class User extends BasicModel
 {
+    public static function create($info)
+    {
+        $info['created=NOW()'] = null;
+        if (!isset($info['name']) || !$info['name'])
+            $info['name'] = $info['email'];
+        return parent::create($info);
+        
+    }
     public static function has($username)
     {
 
-        $info = Sdb::fetchRow('*', self::$table, array('name=?' => $username));
+        $info = Sdb::fetchRow('*', self::$table, array('email=?' => $username));
         return $info ? new self($info) : false;
     }
 
     public static function check($username, $password)
     {
         $conds = array(
-            'name=?' => $username,
+            'email=?' => $username,
             'password=?' => md5($password));
         $info = Sdb::fetchRow('*', self::table(), $conds);
         return $info ? new self($info) : false;

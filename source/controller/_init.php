@@ -15,7 +15,6 @@ function _init()
         $has_login = false;
     } else {
         $has_login = true;
-        $user_type = $user->type;
     }
     $GLOBALS['has_login'] = $has_login;
 

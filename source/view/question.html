@@ -7,10 +7,15 @@
 <h1><?php echo htmlspecialchars($question->title) ?></h1>
 <ul>
   <?php foreach ($answers as $a): ?>
-    <li><?php echo $a->content ?></li>
+    <li>
+    	<strong><?php echo $a->user()->name ?></strong>
+    	<?php echo $a->content ?>
+    </li>
   <?php endforeach ?>
 </ul>
-<form action="/answer_question/<?php echo $question->id ?>" method="post">
-  <textarea name="content"></textarea>
-  <button>Submit</button>
-</form>
+<?php if ($GLOBALS['has_login'] && !$question->answeredBy($GLOBALS['user'])): ?>
+	<form action="/answer_question/<?php echo $question->id ?>" method="post">
+	  <textarea name="content"></textarea>
+	  <button>Submit</button>
+	</form>
+<?php endif ?>

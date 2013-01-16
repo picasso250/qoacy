@@ -16,7 +16,7 @@ $controller = $GLOBALS['controller'];
         <a class="dropdown-toggle"
            data-toggle="dropdown"
            href="#">
-            <?= htmlspecialchars($user->name) ?>
+            <?php echo htmlspecialchars($user->name ? $user->name : $user->email) ?>
             <b class="caret"></b>
           </a>
         <ul class="dropdown-menu">
