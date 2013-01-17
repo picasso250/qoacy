@@ -5,27 +5,39 @@
  */
 $controller = $GLOBALS['controller'];
 ?>
-<div class="masthead">
-  <ul class="nav nav-pills pull-right">
-    <?php if (!$GLOBALS['has_login']): ?>
-      <li><a href="<?= ROOT ?>register">注册</a></li>
-      <li><a href="<?= ROOT ?>login">登录</a></li>
-    <?php else: ?>
-      <?php $user = $GLOBALS['user'] ?>
-      <li class="dropdown">
-        <a class="dropdown-toggle"
-           data-toggle="dropdown"
-           href="#">
-            <?php echo htmlspecialchars($user->name ? $user->name : $user->email) ?>
-            <b class="caret"></b>
-          </a>
-        <ul class="dropdown-menu">
-          <li><a href="<?= ROOT ?>my">账户设置</a></li>
-          <li><a href="<?= ROOT ?>mywiki">我的 xshopy</a></li>
-          <li><a href="<?= ROOT ?>logout">退出</a></li>
-        </ul>
-      </li>
-    <?php endif ?>
-  </ul>
-  <h3 class="muted"><a href="<?= ROOT ?>"><?= $GLOBALS['config']['site']['name'] ?></a></h3>
+<div class="masthead row-fluid">
+  <div class="span4">
+    <h3 class="muted"><a href="<?= ROOT ?>"><?= $GLOBALS['config']['site']['name'] ?></a></h3>
+  </div>
+  <div class="span4">
+    <form action="/search" class="form-search">
+      <div class="input-append">
+        <input type="text" name="q" placeholder="type a question to search" class="search-query">
+        <button class="btn" type="submit">Search</button>
+      </div>
+    </form>
+  </div>
+  <div class="span4">
+    <ul class="nav nav-pills pull-right">
+      <?php if (!$GLOBALS['has_login']): ?>
+        <li><a href="<?= ROOT ?>register">注册</a></li>
+        <li><a href="<?= ROOT ?>login">登录</a></li>
+      <?php else: ?>
+        <?php $user = $GLOBALS['user'] ?>
+        <li class="dropdown">
+          <a class="dropdown-toggle"
+             data-toggle="dropdown"
+             href="#">
+              <?php echo htmlspecialchars($user->name ? $user->name : $user->email) ?>
+              <b class="caret"></b>
+            </a>
+          <ul class="dropdown-menu">
+            <li><a href="<?= ROOT ?>my">账户设置</a></li>
+            <li><a href="<?= ROOT ?>mywiki">我的 xshopy</a></li>
+            <li><a href="<?= ROOT ?>logout">退出</a></li>
+          </ul>
+        </li>
+      <?php endif ?>
+    </ul>
+  </div>
 </div>

@@ -4,7 +4,7 @@
  * @author  ryan <cumt.xiaochi@gmail.com>
  */
 
-$config['site']['name'] = 'x-shopy';
+$config['site']['name'] = 'qoacy';
 
 // error info
 $config['error']['info'] = array(

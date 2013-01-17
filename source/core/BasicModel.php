@@ -21,7 +21,7 @@ class BasicModel
             $this->id = $para->id;
         } else {
             d($para);
-            throw new Exception("not good arg for construct");
+            throw new Exception("not good arg for construct ".get_called_class());
         }
     }
 

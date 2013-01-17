@@ -6,10 +6,30 @@
 class Answer extends BasicModel
 {
 	private $attitudes = null;
+
     public static function create($info)
     {
         $info['created=NOW()'] = null;
         return parent::create($info);
+    }
+
+    public function commentCount()
+    {
+    	return Comment::search()->filterBy('answer', $this)->count();
+    }
+
+    public function comments()
+    {
+    	return Comment::search()->filterBy('answer', $this)->orderBy('id ASC')->find();
+    }
+
+    public function comment($content, User $user)
+    {
+    	$info = array(
+    		'user' => $user,
+    		'content' => $content,
+    		'answer' => $this);
+    	Comment::create($info);
     }
 
     public function attitude($action, User $user)
@@ -32,10 +52,28 @@ class Answer extends BasicModel
     	Attitude::create($info);
     }
 
+    public function attitudeInfo()
+    {
+    	$goods = $this->goodAttitudes();
+		$this->goods = $goods;
+		$this->goodCount = count($goods);
+
+		$bads = $this->badAttitudes();
+		$this->badCount = count($bads);
+
+		if($GLOBALS['has_login']) {
+			$me = $GLOBALS['user']->id;
+			$this->byMe = $me === $this->user;
+
+			$this->upByMe = in_array($me, array_map(function ($at) {return $at->user;}, $goods));
+			$this->downByMe = in_array($me, array_map(function ($at) {return $at->user;}, $bads));
+		}
+    }
+
     public function attitudes()
     {
     	if ($this->attitudes === null)
-	    	$this->attitudes = Attitude::search()->filterBy('answer', $this)->find();
+	    	$this->attitudes = Attitude::search()->filterBy('answer', $this)->orderBy('id DESC')->find();
 	    return $this->attitudes;
     }
 

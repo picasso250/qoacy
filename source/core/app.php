@@ -99,7 +99,7 @@ function execute_logic()
         call_user_func($init_func);
 
     if (function_exists($controller))
-        call_user_func($controller);
+        call_user_func_array($controller, $matches);
 
     $method_func = $controller.'_'.$method;
     if (function_exists($method_func))

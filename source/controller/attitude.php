@@ -11,4 +11,6 @@ function attitude()
 	$action = _req('action');
 	$answer = new Answer($id);
 	$answer->attitude($action, $GLOBALS['user']);
+	$answer->attitudeInfo();
+	render_view('attitude', compact('answer'));
 }

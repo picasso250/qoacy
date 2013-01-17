@@ -9,35 +9,20 @@
   <?php foreach ($answers as $a): ?>
     <li class="" data-id="<?php echo $a->id ?>">
     	<strong><?php echo $a->user()->name ?></strong>
-      <div>
-        <?php if ($GLOBALS['has_login']): ?>
-          <?php if ($a->byMe): ?>
-          <?php else: ?>
-            <span
-              class="btn btn-mini attitude-btn <?php echo $a->upByMe ? 'btn-inverse' : '' ?>"
-              data-action="<?php echo $a->upByMe ? 'cancel' : 'up' ?>">Up</span>
-            <span
-              class="btn btn-mini attitude-btn <?php echo $a->downByMe ? 'btn-inverse' : '' ?>"
-              data-action="<?php echo $a->downByMe ? 'cancel' : 'down' ?>">Down</span>
-          <?php endif ?>
-        <?php endif ?>
-        <span><?php echo $a->goodCount ?> people upvote</span>
-        <?php if ($a->goodCount): ?>
-          <ul class="inline">
-            <?php foreach ($a->goods as $at): ?>
-              <li><a href="/people/"><?php echo $at->user()->name ?></a></li>
-            <?php endforeach ?>
-          </ul>
-        <?php endif ?>
+      <div class="attitude">
+        <?php render_view('attitude', array('answer' => $a)) ?>
       </div>
     	<div><?php echo $a->content ?></div>
       <div><?php echo $a->created ?></div>
+      <span class="link comment-trigger"><?php echo $a->commentCount() ?> comments</span>
+      <div class="comments"></div>
     </li>
   <?php endforeach ?>
 </ul>
 <?php if ($GLOBALS['has_login'] && !$question->answeredBy($GLOBALS['user'])): ?>
+  <a href="#"><?php echo $me->name ?></a>
 	<form action="/answer_question/<?php echo $question->id ?>" method="post">
 	  <textarea name="content"></textarea>
-	  <button>Submit</button>
+	  <button>Answer</button>
 	</form>
 <?php endif ?>

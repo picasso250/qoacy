@@ -9,3 +9,7 @@ body {
 .modal form {
     margin-bottom: 0;
 }
+
+.masthead .form-search {
+	margin-top: 20px;
+}

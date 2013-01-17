@@ -29,7 +29,9 @@ $config['urls'] = array(
     '/login' => 'login',
     '/register' => 'register',
     '/logout' => 'logout',
-    '/attitude' => 'attitude');
+    '/attitude' => 'attitude',
+    '/get_comment_div' => 'get_comment_div',
+    '/comment/(.+)' => 'comment');
 
 // pages need login
 $config['login_page'] = array();

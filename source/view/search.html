@@ -5,6 +5,14 @@
  */
 ?>
 <div>search result for <?php echo htmlspecialchars($q); ?></div>
+<ul>
+	<?php foreach ($questions as $question): ?>
+		<li>
+			<a href="/question/<?php echo $question->id ?>"><?php echo $question->title ?></a>
+			<a href="/question/<?php echo $question->id ?>"><?php echo $question->answerCount() ?> answers</a>
+		</li>
+	<?php endforeach ?>
+</ul>
 <h1>ask a question</h1>
 <form action="/ask_question" method="post" class="">
 	<input name="title" type="text" value="<?php echo $q ?>">

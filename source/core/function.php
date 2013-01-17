@@ -9,19 +9,19 @@ function i(&$param, $or='') {
     return isset($param)? $param : $or;
 }
 
-function _req($name, $default = '') 
+function _req($name, $default = '')
 {
     return isset($_REQUEST[$name]) && $_REQUEST[$name] ? trim($_REQUEST[$name]) : $default;
 }
 
-function _post($name)
+function _post($name, $default = '')
 {
     return isset($_POST[$name]) && $_POST[$name] ? trim($_POST[$name]) : $default;
 }
 
-function _get($name)
+function _get($name, $default = '')
 {
-    return isset($_POST[$name]) && $_POST[$name] ? trim($_POST[$name]) : $default;
+    return isset($_GET[$name]) && $_GET[$name] ? trim($_GET[$name]) : $default;
 }
 
 /* html node */

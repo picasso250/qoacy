@@ -29,8 +29,10 @@ class Searcher
         return $this->table;
     }
 
-    public function filterBy($exp, $value)
+    public function filterBy($exp, $value, $cmp = '=')
     {
+        $cmp = " $cmp ";
+
         // is_object() 判断不可少，不然SAE上会把String也认为Ojbect
         if (is_object($value) && is_a($value, 'BasicModel'))
             $value = $value->id;
@@ -43,11 +45,11 @@ class Searcher
             $ref = $matches[1];
             $refKey = $matches[2];
             $refTable = $relationMap[$ref];
-            $this->conds["$refTable.$refKey=?"] = $value;
-            $this->conds["$this->table.$ref=$refTable.id"] = null;
+            $this->conds["$refTable.$refKey".$cmp.'?'] = $value;
+            $this->conds["$this->table.$ref".$cmp."$refTable.id"] = null;
         } else {
             if (strpos($exp, '?') === false && $value !== null) {
-                $exp = "$this->table.$exp=?";
+                $exp = "$this->table.$exp".$cmp.'?';
             }
             $this->conds[$exp] = $value;
         }
@@ -125,6 +127,31 @@ class Searcher
             return new $class($e);
         }, $arr);
         return $ret;
+    }
+
+    public function count()
+    {
+        $field = count($this->tables) > 1 ? "$this->table.id" : '*';
+        if ($this->distinct)
+            $field = "DISTINCT($field)";
+        $field = "count($field)";
+        if ($this->conds) {
+            $condStr = implode(' AND ', array_keys($this->conds));
+            $a = array_filter(array_values($this->conds));
+            $values = array();
+            foreach ($a as $v) {
+                if (is_array($v)) {
+                    $values += $v;
+                } else {
+                    $values[] = $v;
+                }
+            }
+            $conds = array($condStr => $values);
+        } else {
+            $conds = '';
+        }
+        $arr = Sdb::fetch($field, $this->tables, $conds);
+        return $arr[0];
     }
 
     // ------------ private section -----------------

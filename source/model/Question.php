@@ -24,6 +24,11 @@ class Question extends BasicModel
         return Answer::search()->filterBy('question', $this)->find();
     }
 
+    public function answerCount()
+    {
+        return Answer::search()->filterBy('question', $this)->count();
+    }
+
     public function answeredBy(User $user)
     {
         $conds = array('user=? AND question=?' => array($user->id, $this->id));
