@@ -173,7 +173,7 @@ class Sdb
         self::addLog($sql, $bindValues);
     }
 
-    public static function del($table, $conds) {
+    public static function delete($table, $conds) {
         if (is_array($conds)) {
             $p = reset($conds); // para or list of para
             $conds = reset(array_keys($conds));

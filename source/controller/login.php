@@ -3,9 +3,9 @@
  * @author  ryan <cumt.xiaochi@gmail.com>
  */
 
-function login_GET()
+function login_init()
 {
-	render_view('master');
+	$GLOBALS['data'] = array();
 }
 
 function login_POST()
@@ -17,6 +17,13 @@ function login_POST()
 		redirect();
 	} else {
 		$msg = 'wrong user name or password';
-		render_view('master', compact('username', 'msg'));
+		$GLOBALS['data']['msg'] = $msg;
+		$GLOBALS['data']['username'] = $username;
 	}
+}
+
+function login_end()
+{
+	add_scripts('jquery.validate.min');
+	render_view('master', $GLOBALS['data']);
 }

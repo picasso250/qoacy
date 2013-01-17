@@ -1,4 +1,4 @@
 qoacy
 =====
 
-quora like web site, write in python
+quora like web site, write in PHP

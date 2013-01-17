@@ -98,13 +98,13 @@ class Searcher
 
     public function find()
     {
-        $field = "$this->table.id";
+        $field = count($this->tables) > 1 ? "$this->table.id" : '*';
         if ($this->distinct)
             $field = "DISTINCT($field)";
         $limitStr = $this->limit ? "LIMIT $this->limit" : '';
         $tail = "$limitStr OFFSET $this->offset";
         if ($this->conds) {
-            $condStr = implode('AND', array_keys($this->conds));
+            $condStr = implode(' AND ', array_keys($this->conds));
             $a = array_filter(array_values($this->conds));
             $values = array();
             foreach ($a as $v) {
@@ -118,12 +118,12 @@ class Searcher
         } else {
             $conds = '';
         }
-        $ids = Sdb::fetch($field, $this->tables, $conds, $this->orders, $tail);
+        $arr = Sdb::fetch($field, $this->tables, $conds, $this->orders, $tail);
 
         $class = $this->class;
-        $ret = array_map(function ($id) use($class) {
-            return new $class($id);
-        }, $ids);
+        $ret = array_map(function ($e) use($class) {
+            return new $class($e);
+        }, $arr);
         return $ret;
     }
 

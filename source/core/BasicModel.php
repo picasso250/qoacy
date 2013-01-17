@@ -11,8 +11,9 @@ class BasicModel
     
     public function __construct($para)
     {
-        if (is_array($para) && isset($para['id'])) {
-            $this->id = $para['id'];
+        if (is_array($para)) {
+            if (isset($para['id']))
+                $this->id = $para['id'];
             $this->info = $para;
         } elseif (is_numeric($para)) {
             $this->id = $para;
@@ -141,7 +142,7 @@ class BasicModel
 
     public function del()
     {
-        Sdb::del(self::table(), $this->selfCond());
+        Sdb::delete(self::table(), $this->selfCond());
     }
 
     public static function search()
