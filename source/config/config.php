@@ -17,6 +17,10 @@ return array(
         array('POST', '/comment/add', array('Question', 'comment')),
     ),
 
+    'controllers.login' => array(
+        array('Question', 'ask'),
+    );
+
     'gender' => array(
         'male' => '男',
         'female' => '女'
