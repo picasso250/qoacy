@@ -1,6 +1,8 @@
 <?php
 
-class Question extends IdDao
+use ptf\IdEntity;
+
+class Question extends IdEntity
 {
     public function __construct()
     {

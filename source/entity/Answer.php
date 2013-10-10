@@ -1,6 +1,8 @@
 <?php
 
-class Answer extends IdDao
+use ptf\IdEntity;
+
+class Answer extends IdEntity
 {
 
     public function init($arr)
