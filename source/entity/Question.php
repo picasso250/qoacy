@@ -8,6 +8,7 @@ class Question extends IdEntity
     {
         $this->answerDao = new AnswerDao;
     }
+    
     public function getAnswers()
     {
         return $this->answerDao

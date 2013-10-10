@@ -1,13 +1,11 @@
 <?php
 
+use ptf\IdEntity;
+
 /**
  * @author  ryan <cumt.xiaochi@gmail.com>
  */
-class Comment extends BasicModel
+class Comment extends IdEntity
 {
-	public static function create($info)
-	{
-		$info['created=NOW()'] = null;
-		return parent::create($info);
-	}
+
 }

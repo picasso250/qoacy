@@ -1,12 +1,13 @@
 <?php
 
+use ptf\IdEntity;
+
 /**
  * @author  ryan <cumt.xiaochi@gmail.com>
  */
 
-class User extends BasicModel
+class User extends IdEntity
 {
-
     public function changePassword($newPassword)
     {
         $this->password = md5($newPassword);

@@ -2,13 +2,8 @@
 
 use ptf\IdDao;
 
-class Answer extends IdDao
+class AnswerDao extends IdDao
 {
-    public $commentDao;
-    public function __construct()
-    {
-        $this->commentDao = new CommentDao;
-    }
 
     public function add($arr)
     {
@@ -18,70 +13,40 @@ class Answer extends IdDao
 
     public function getComments()
     {
-        return $this->commentDao
+        $commentDao = new CommentDao;
+        return $commentDao
                 ->where('answer_id', $this->id)
                 ->orderBy(array('id' => 'ASC'))
                 ->findMany();
     }
 
-    public function attitude($action, User $user)
+    public function upVote($user_id)
     {
-        if ($action === 'cancel') {
-            $conds = array('answer=? AND user=?' => array($this->id, $user->id));
-            Sdb::delete(Attitude::table(), $conds);
-            return;
-        }
-        $actionMap = array(
-            'up' => 1,
-            'down' => 0);
-        $attitude = $actionMap[$action];
-        $conds = array('answer=? AND user=? AND attitude=?' => array($this->id, $user->id, $attitude ? 0 : 1));
-        Sdb::delete(Attitude::table(), $conds);
-        $info = array(
-            'attitude' => $attitude,
-            'user' => $user,
-            'answer' => $this);
-        Attitude::create($info);
+        return $this->attitude($user_id, 1);
     }
 
-    public function attitudeInfo()
+    public function downVote($user_id)
     {
-        $goods = $this->goodAttitudes();
-        $this->goods = $goods;
-        $this->goodCount = count($goods);
-
-        $bads = $this->badAttitudes();
-        $this->badCount = count($bads);
-
-        if($GLOBALS['has_login']) {
-            $me = $GLOBALS['user']->id;
-            $this->byMe = $me === $this->user;
-
-            $this->upByMe = in_array($me, array_map(function ($at) {return $at->user;}, $goods));
-            $this->downByMe = in_array($me, array_map(function ($at) {return $at->user;}, $bads));
-        }
+        return $this->attitude($user_id, -1);
     }
 
-    public function attitudes()
+    public function attitude($user_id, $attitude)
     {
-        if ($this->attitudes === null)
-            $this->attitudes = Attitude::search()->where('answer_id', $this->id)->orderBy('id DESC')->findMany();
-        return $this->attitudes;
+        $attitudeDao = new AttitudeDao();
+        return $attitudeDao->add(array(
+                'user_id' => $user_id,
+                'attitude' => $attitude,
+                'answer_id' => $this->id,
+            ));
     }
 
-    public function goodAttitudes()
+    public function getAttitudes()
     {
-        $goods = array_filter($this->attitudes(), function ($at) {
-            return $at->attitude;
-        });
-        return $goods;
-    }
-    public function badAttitudes()
-    {
-        $bads = array_filter($this->attitudes(), function ($at) {
-            return !$at->attitude;
-        });
-        return $bads;
+        $attitudeDao = new AttitudeDao();
+        return $attitudeDao
+                ->where('answer_id', $this->id)
+                ->orderBy(array('id' => 'DESC'))
+                ->findMany();
     }
 
 }
