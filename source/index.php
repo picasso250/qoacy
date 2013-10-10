@@ -10,9 +10,13 @@
 ini_set('display_errors', 1); // 在 SAE 上 ini_set() 不起作用，但也不会报错
 error_reporting(E_ALL);
 
-define('IN_APP', 1);
+if (isset($_SERVER['HTTP_APPNAME'])) { // on sae
+    define('ON_SERVER', TRUE);
+    define('UP_DOMAIN', 'xxx');
+} else {
+    define('ON_SERVER', FALSE);
+}
 
-define('DS', DIRECTORY_SEPARATOR);
 define('APP_ROOT', __DIR__ . DS);
 define('CORE_ROOT', APP_ROOT . 'core' . DS);
 
