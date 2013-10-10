@@ -28,25 +28,10 @@ class UserDao extends IdDao
             ));
     }
 
-    public function changePassword($newPassword)
-    {
-        $this->update('password', md5($newPassword));
-    }
-
-    public function login()
-    {
-        $_SESSION['se_user_id'] = $this->id;
-    }
-
-    public function logout()
-    {
-        $_SESSION['se_user_id'] = 0;
-    }
-
-    public static function loggingUser()
+    public function getCurrentloginUser()
     {
         if (isset($_SESSION['se_user_id']) && $_SESSION['se_user_id']) {
-            return new self($_SESSION['se_user_id']);
+            return $this->findOne($_SESSION['se_user_id']);
         } else {
             return false;
         }
