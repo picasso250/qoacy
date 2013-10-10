@@ -10,31 +10,26 @@
 ini_set('display_errors', 1); // 在 SAE 上 ini_set() 不起作用，但也不会报错
 error_reporting(E_ALL);
 
-if (isset($_SERVER['HTTP_APPNAME'])) { // on sae
-    define('ON_SERVER', TRUE);
-    define('UP_DOMAIN', 'xxx');
+use ptf\Application;
+use ptf\PdoWrapper;
+
+if (isset($_SERVER['HTTP_APPNAME'])) {
+    define('DEPLOY_ENV', 'prd');
 } else {
-    define('ON_SERVER', FALSE);
+    define('DEPLOY_ENV', 'dev');
 }
 
-define('APP_ROOT', __DIR__ . DS);
-define('CORE_ROOT', APP_ROOT . 'core' . DS);
+include __DIR__.'/autoload.php';
 
-include APP_ROOT . 'config/common.php';
+date_default_timezone_set('PRC');
 
-// if not debug, mute all error reportings
-if (!(defined('DEBUG') ? DEBUG : 0)) {
-    ini_set('display_errors', 0);
-    error_reporting(0);
-}
+$app = new Application;
+$app->root = __DIR__;
+$config = array_merge(
+    require __DIR__.'/config/config.php',
+    require __DIR__.'/config/config.'.DEPLOY_ENV.'.php'
+);
+PdoWrapper::config($config['db']);
+$app->config($config);
+$app->run();
 
-require CORE_ROOT . 'function.php';
-require CORE_ROOT . 'app.php';
-init_var();
-init_env();
-
-$user_lib_file = APP_ROOT . 'lib' . DS . 'function.php';
-if (file_exists($user_lib_file))
-    require_once $user_lib_file;
-
-execute_logic();

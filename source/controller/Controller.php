@@ -3,13 +3,14 @@
  * @author  ryan <cumt.xiaochi@gmail.com>
  */
 
-use ptf\Controller as PC;
+use ptf\Controller as ptfController;
 
-class Controller extends PC
+class Controller extends ptfController
 {
     public function __construct()
     {
         $this->userDao = new UserDao;
+        $this->questionDao = new QuestionDao;
 
         // login
         $this->currentUser = $this->userDao->getCurrentLoginUser();
