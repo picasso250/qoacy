@@ -1,0 +1,20 @@
+<?php
+/**
+ * @author  ryan <cumt.xiaochi@gmail.com>
+ */
+?>
+<ul>
+  <?php foreach ($comments as $c): ?>
+    <li class="" data-id="<?php echo $c->id ?>">
+    	<strong><?php echo $c->user()->name ?></strong>
+    	<div><?php echo $c->content ?></div>
+      <div><?php echo $c->created ?></div>
+    </li>
+  <?php endforeach ?>
+</ul>
+<?php if ($GLOBALS['has_login']): ?>
+  <form action="/comment/<?php echo $answer->id ?>" method="post">
+    <textarea name="content"></textarea>
+    <button>Comment</button>
+  </form>
+<?php endif ?>
