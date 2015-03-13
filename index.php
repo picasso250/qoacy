@@ -16,6 +16,8 @@ define('SRC_ROOT', __DIR__.'/source');
 include SRC_ROOT.'/actions.php';
 include SRC_ROOT.'/logic.php';
 
+session_start();
+
 define('CONFIG_ROOT', __DIR__.'/source/config');
 define('VIEW_ROOT', SRC_ROOT.'/view');
 define('LAYOUT_PATH', VIEW_ROOT.'/layout/master.html');

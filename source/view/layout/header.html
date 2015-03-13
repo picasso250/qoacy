@@ -21,12 +21,12 @@
           <a class="dropdown-toggle"
              data-toggle="dropdown"
              href="#">
-              <?php echo htmlspecialchars($user->name ? $user->name : $user->email) ?>
+              <?php echo htmlspecialchars($user['email']) ?>
               <b class="caret"></b>
             </a>
           <ul class="dropdown-menu">
             <li><a href="<?= ROOT ?>my">账户设置</a></li>
-            <li><a href="<?= ROOT ?>mywiki">我的 xshopy</a></li>
+            <li><a href="<?= ROOT ?>mywiki">我的 <?= Service('config')['name'] ?></a></li>
             <li><a href="<?= ROOT ?>logout">退出</a></li>
           </ul>
         </li>
