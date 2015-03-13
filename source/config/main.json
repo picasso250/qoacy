@@ -1,0 +1,22 @@
+{
+    "routers" => [
+        ["GET", "/", ["Index", "index"]],
+        ["GET", "/search", ["Index", "search"]],
+        ["POST", "/ask", ["Question", "ask"]],
+        ["GET", "/question/[:id]", ["Question", "view"]],
+        ["POST", "/question/[:id]/answer", ["Question", "answer"]],
+        ["GET", "/login", ["Account", "login"]],
+        ["GET", "/register", ["Account", "register"]],
+        ["GET", "/logout", ["Account", "logout"]],
+        ["GET", "/question/[:id]/[:attitude]", ["Question", "attitude"]],
+        ["POST", "/comment/add", ["Question", "comment"]],
+    ],
+
+    "gender": {
+        "male": "男",
+        "female": "女"
+    },
+
+    "description": "问答",
+    "keywords": ["问答"],
+}
