@@ -28,4 +28,7 @@ Service('db', $db);
 $user_id = user_id();
 Service('user', $user_id ? $db->get_user_by_id($user_id) : null);
 
-run($config['routers']);
+run($config['routers'], function()
+{
+	exit('page 404');
+});
