@@ -90,6 +90,7 @@ function Question_view($params)
     $answers = Service('db')->queryAll('SELECT * from answer where question_id=? order by good_count desc, bad_count asc limit 1000', [$id]);
     foreach ($answers as &$answer) {
     	$answer['user'] = Service('db')->get_user_by_id($answer['user_id']);
+    	$answer['commentCount'] = Service('db')->get_comment_count_by_answer_id($answer['id']);
     }
     render(VIEW_ROOT.'/question.html', compact('question', 'answers'), LAYOUT_PATH);
 }
