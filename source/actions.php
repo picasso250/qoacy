@@ -103,5 +103,5 @@ function answer($params)
             'content' => $content,
             'user_id' => user_id(),
         ));
-    echo json(0);
+    echo json(['url' => '/question/'.$id]);
 }

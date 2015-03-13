@@ -11,13 +11,7 @@ class Question extends IdEntity
     
     public function getAnswers()
     {
-        return $this->answerDao
-                ->where('question_id', $this->id)
-                ->orderBy(array(
-                    'good_count' => 'desc',
-                    'bad_count' => 'asc',
-                ))
-                ->findMany();
+        
     }
 
     public function getAnswerCount()
