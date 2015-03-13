@@ -1,7 +1,7 @@
 <?php
 function index_GET()
 {
-    $questions = Service('db')->get_all_question(100);
+    $questions = Service('db')->queryAll('SELECT * from question order by id desc limit 100');
     render(VIEW_ROOT.'/index.html', compact('questions'), LAYOUT_PATH);
 }
 function login_ajax()
