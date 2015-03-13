@@ -5,7 +5,7 @@
         ["%^/ask%", ["Question", "ask"]],
         ["%^/question/[:id]%", ["Question", "view"]],
         ["%^/question/[:id]/answer%", ["Question", "answer"]],
-        ["%^/login%", ["Account", "login"]],
+        ["%^/login%", "login"],
         ["%^/register%", ["Account", "register"]],
         ["%^/logout%", ["Account", "logout"]],
         ["%^/question/[:id]/[:attitude]%", ["Question", "attitude"]],
