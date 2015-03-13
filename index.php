@@ -9,12 +9,10 @@ include __DIR__.'/PHP-tiny/autoload.php';
 
 date_default_timezone_set('PRC');
 
+define('SRC_ROOT', __DIR__.'/source');
 define('CONFIG_ROOT', __DIR__.'/source/config');
 
-$config = array_merge(
-	json_decode(file_get_contents(CONFIG_ROOT.'/main.json')),
-	json_decode(file_get_contents(CONFIG_ROOT.'/env.json'))
-);
+$config = load_config(CONFIG_ROOT.'/main.json', CONFIG_ROOT.'/env.json');
 Service('config', $config);
 $dbc = $config['db'];
 Service('db', new DB($dbc['dsn'], $dbc['username'], $dbc['password']));
