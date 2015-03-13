@@ -1,16 +1,21 @@
 {
     "routers": [
-        ["GET", "/", ["Index", "index"]],
-        ["GET", "/search", ["Index", "search"]],
-        ["POST", "/ask", ["Question", "ask"]],
-        ["GET", "/question/[:id]", ["Question", "view"]],
-        ["POST", "/question/[:id]/answer", ["Question", "answer"]],
-        ["GET", "/login", ["Account", "login"]],
-        ["GET", "/register", ["Account", "register"]],
-        ["GET", "/logout", ["Account", "logout"]],
-        ["GET", "/question/[:id]/[:attitude]", ["Question", "attitude"]],
-        ["POST", "/comment/add", ["Question", "comment"]],
+        ["%/%", "index_GET"],
+        ["%/search%", ["Index", "search"]],
+        ["%/ask%", ["Question", "ask"]],
+        ["%/question/[:id]%", ["Question", "view"]],
+        ["%/question/[:id]/answer%", ["Question", "answer"]],
+        ["%/login%", ["Account", "login"]],
+        ["%/register%", ["Account", "register"]],
+        ["%/logout%", ["Account", "logout"]],
+        ["%/question/[:id]/[:attitude]%", ["Question", "attitude"]],
+        ["%/comment/add%", ["Question", "comment"]]
     ],
+    "db": {
+      "dsn": "mysql:host=localhost;dbname=qoacy",
+      "username": "root",
+      "password": "root"
+    },
 
     "gender": {
         "male": "男",
@@ -18,5 +23,5 @@
     },
 
     "description": "问答",
-    "keywords": ["问答"],
+    "keywords": ["问答"]
 }
