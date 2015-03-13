@@ -48,14 +48,5 @@ $siteConfig = Service('config');
     <script src="<?= _js('jquery-1.8.3.min') ?>"></script>
     <script src="<?= _js('bootstrap') ?>"></script>
 
-    <?php foreach ($GLOBALS['page']['scripts'] as $src): ?>
-      <script type="text/javascript" src="<?= _js($src) ?>"></script>
-    <?php endforeach ?>
-
-    <?php $controller = $GLOBALS['controller']; ?>
-    <?php if (file_exists(AppFile::js($controller))): ?>
-      <script type="text/javascript" src="<?= _js($controller) ?>"></script>
-    <?php endif ?>
-
   </body>
 </html>

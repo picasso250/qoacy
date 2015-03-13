@@ -1,12 +1,6 @@
-<?php
-/**
- * @author  ryan <cumt.xiaochi@gmail.com>
- */
-$controller = $GLOBALS['controller'];
-?>
 <div class="masthead row-fluid">
   <div class="span4">
-    <h3 class="muted"><a href="<?= ROOT ?>"><?= $GLOBALS['config']['site']['name'] ?></a></h3>
+    <h3 class="muted"><a href="<?= ROOT ?>"><?= Service('config')['name'] ?></a></h3>
   </div>
   <div class="span4">
     <form action="/search" class="form-search">
@@ -18,11 +12,11 @@ $controller = $GLOBALS['controller'];
   </div>
   <div class="span4">
     <ul class="nav nav-pills pull-right">
-      <?php if (!$GLOBALS['has_login']): ?>
+      <?php if (!Service('user')): ?>
         <li><a href="<?= ROOT ?>register">注册</a></li>
         <li><a href="<?= ROOT ?>login">登录</a></li>
       <?php else: ?>
-        <?php $user = $GLOBALS['user'] ?>
+        <?php $user = Service('user') ?>
         <li class="dropdown">
           <a class="dropdown-toggle"
              data-toggle="dropdown"

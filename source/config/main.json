@@ -1,15 +1,15 @@
 {
     "routers": [
-        ["%/%", "index_GET"],
-        ["%/search%", ["Index", "search"]],
-        ["%/ask%", ["Question", "ask"]],
-        ["%/question/[:id]%", ["Question", "view"]],
-        ["%/question/[:id]/answer%", ["Question", "answer"]],
-        ["%/login%", ["Account", "login"]],
-        ["%/register%", ["Account", "register"]],
-        ["%/logout%", ["Account", "logout"]],
-        ["%/question/[:id]/[:attitude]%", ["Question", "attitude"]],
-        ["%/comment/add%", ["Question", "comment"]]
+        ["%^/$%", "index_GET"],
+        ["%^/search%", ["Index", "search"]],
+        ["%^/ask%", ["Question", "ask"]],
+        ["%^/question/[:id]%", ["Question", "view"]],
+        ["%^/question/[:id]/answer%", ["Question", "answer"]],
+        ["%^/login%", ["Account", "login"]],
+        ["%^/register%", ["Account", "register"]],
+        ["%^/logout%", ["Account", "logout"]],
+        ["%^/question/[:id]/[:attitude]%", ["Question", "attitude"]],
+        ["%^/comment/add%", ["Question", "comment"]]
     ],
     "db": {
       "dsn": "mysql:host=localhost;dbname=qoacy",

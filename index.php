@@ -6,6 +6,7 @@
  */
 
 include __DIR__.'/PHP-tiny/autoload.php';
+include __DIR__.'/PHP-tiny/ptf/account.php';
 
 date_default_timezone_set('PRC');
 
@@ -22,6 +23,9 @@ define('LAYOUT_PATH', VIEW_ROOT.'/layout/master.html');
 $config = load_config(CONFIG_ROOT.'/main.json', CONFIG_ROOT.'/env.json');
 Service('config', $config);
 $dbc = $config['db'];
-Service('db', new DB($dbc['dsn'], $dbc['username'], $dbc['password']));
+$db = new DB($dbc['dsn'], $dbc['username'], $dbc['password']);
+Service('db', $db);
+$user_id = user_id();
+Service('user', $user_id ? $db->get_user_by_id($user_id) : null);
 
 run($config['routers']);
