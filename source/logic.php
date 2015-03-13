@@ -1,9 +1,9 @@
 <?php
 
 function _css($file) {
-    return ROOT . "view/css/$file.css";
+    return ROOT . "css/$file.css";
 }
 
 function _js($file) {
-    return ROOT . "view/js/$file.js";
+    return ROOT . "js/$file.js";
 }
