@@ -1,9 +1,8 @@
 <?php
-!defined('IN_APP') && exit('ILLEGAL EXECUTION');
 /**
  * @author  ryan <cumt.xiaochi@gmail.com>
  */
-$siteConfig = $GLOBALS['config']['site'];
+$siteConfig = Service('config');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,12 +29,12 @@ $siteConfig = $GLOBALS['config']['site'];
 
     <div class="container-narrow">
 
-      <?php render_view('header'); ?>
+      <?php include __DIR__.'/header.html'; ?>
 
       <hr>
 
       <div class="row-fluid">
-        <?php render_view($GLOBALS['view'], $data); ?>
+        <?php include $_inner_ ?>
       </div>
 
       <hr>

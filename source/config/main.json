@@ -16,6 +16,7 @@
       "username": "root",
       "password": "root"
     },
+    "name": "问答",
 
     "gender": {
         "male": "男",
