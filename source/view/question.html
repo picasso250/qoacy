@@ -1,27 +1,21 @@
-<?php
-!defined('IN_APP') && exit('ILLEGAL EXECUTION');
-/**
- * @author  ryan <cumt.xiaochi@gmail.com>
- */
-?>
-<h1><?php echo htmlspecialchars($question->title) ?></h1>
+<h1><?php echo htmlspecialchars($question['title']) ?></h1>
 <ul>
   <?php foreach ($answers as $a): ?>
-    <li class="" data-id="<?php echo $a->id ?>">
-    	<strong><?php echo $a->user()->name ?></strong>
+    <li class="" data-id="<?php echo $a['id'] ?>">
+    	<strong><?php echo $a['user']()['name'] ?></strong>
       <div class="attitude">
         <?php render_view('attitude', array('answer' => $a)) ?>
       </div>
-    	<div><?php echo $a->content ?></div>
-      <div><?php echo $a->created ?></div>
-      <span class="link comment-trigger"><?php echo $a->commentCount() ?> comments</span>
+    	<div><?php echo $a['content'] ?></div>
+      <div><?php echo $a['created'] ?></div>
+      <span class="link comment-trigger"><?php echo $a['commentCount']() ?> comments</span>
       <div class="comments"></div>
     </li>
   <?php endforeach ?>
 </ul>
-<?php if ($GLOBALS['has_login'] && !$question->answeredBy($GLOBALS['user'])): ?>
-  <a href="#"><?php echo $me->name ?></a>
-	<form action="/answer_question/<?php echo $question->id ?>" method="post">
+<?php if (($user = Service('user')) && !is_question_answered_by($answers, user_id())): ?>
+  <a href="#"><?php echo $user['name'] ?></a>
+	<form action="/answer_question/<?php echo $question['id'] ?>" method="post">
 	  <textarea name="content"></textarea>
 	  <button>Answer</button>
 	</form>

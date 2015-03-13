@@ -2,9 +2,9 @@
     "routers": [
         ["%^/$%", "index_GET"],
         ["%^/search$%", "search"],
-        ["%^/ask%", ["Question", "ask"]],
-        ["%^/question/[:id]%", ["Question", "view"]],
-        ["%^/question/[:id]/answer%", ["Question", "answer"]],
+        ["%^/ask%", "ask"],
+        ["%^/question/(?<id>\\d+)$%", "Question_view"],
+        ["%^/question/(?<id>\\d+)/answer%", "Question_answer"],
         ["%^/login$%", "login"],
         ["%^/login/ajax$%", "login_ajax"],
         ["%^/register$%", "register"],

@@ -71,3 +71,22 @@ function search()
 		$questions = array();
     render(VIEW_ROOT.'/search.html', compact('q', 'questions'), LAYOUT_PATH);
 }
+function ask()
+{
+    $title = _post('title');
+    if (empty($title)) {
+    	echo json(1, '问题为空');
+    }
+    $id = Service('db')->insert('question', array(
+                'title' => $title,
+                'user' => user_id(),
+            ));
+    echo json(['url' => "/question/$id"]);
+}
+function Question_view($params)
+{
+	$id = $params['id'];
+    $question = Service('db')->get_question_by_id($id);
+    $answers = Service('db')->queryAll('SELECT * from answer where question=? order by good_count desc, bad_count asc limit 1000', [$id]);
+    render(VIEW_ROOT.'/question.html', compact('question', 'answers'), LAYOUT_PATH);
+}
