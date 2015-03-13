@@ -17,10 +17,4 @@ Service('config', $config);
 $dbc = $config['db'];
 Service('db', new DB($dbc['dsn'], $dbc['username'], $dbc['password']));
 
-run(array_map(function($router) {
-	return [$router[1], function ($params) {
-		list($cc, $a) = $routers[2];
-		$c = new $cc;
-		$c->$a($params);
-	}];
-}, $config['routers']));
+run($config['routers']);
