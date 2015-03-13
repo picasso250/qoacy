@@ -10,7 +10,7 @@ function _js($file) {
 function is_question_answered_by($answers, $user_id)
 {
 	foreach ($answers as $a) {
-		if ($user_id == $a['user']) {
+		if ($user_id == $a['user_id']) {
 			return true;
 		}
 	}

@@ -87,6 +87,20 @@ function Question_view($params)
 {
 	$id = $params['id'];
     $question = Service('db')->get_question_by_id($id);
-    $answers = Service('db')->queryAll('SELECT * from answer where question=? order by good_count desc, bad_count asc limit 1000', [$id]);
+    $answers = Service('db')->queryAll('SELECT * from answer where question_id=? order by good_count desc, bad_count asc limit 1000', [$id]);
+    foreach ($answers as &$answer) {
+    	$answer['user'] = Service('db')->get_user_by_id($answer['user_id']);
+    }
     render(VIEW_ROOT.'/question.html', compact('question', 'answers'), LAYOUT_PATH);
+}
+function answer($params)
+{
+	$id = $params['id'];
+    $content = _post('content');
+    Service('db')->insert('answer', array(
+            'question_id' => $id,
+            'content' => $content,
+            'user_id' => user_id(),
+        ));
+    echo json(0);
 }

@@ -1,25 +1,19 @@
-<?php
-!defined('IN_APP') && exit('ILLEGAL EXECUTION');
-/**
- * @author  ryan <cumt.xiaochi@gmail.com>
- */
-?>
-<?php if ($GLOBALS['has_login']): ?>
-  <?php if ($answer->byMe): ?>
+<?php if (user_id()): ?>
+  <?php if ($answer['user_id'] == user_id()): ?>
   <?php else: ?>
     <span
-      class="btn btn-mini attitude-btn <?php echo $answer->upByMe ? 'btn-inverse' : '' ?>"
-      data-action="<?php echo $answer->upByMe ? 'cancel' : 'up' ?>">Up</span>
+      class="btn btn-mini attitude-btn <?php echo $answer['upByMe'] ? 'btn-inverse' : '' ?>"
+      data-action="<?php echo $answer['upByMe'] ? 'cancel' : 'up' ?>">Up</span>
     <span
-      class="btn btn-mini attitude-btn <?php echo $answer->downByMe ? 'btn-inverse' : '' ?>"
-      data-action="<?php echo $answer->downByMe ? 'cancel' : 'down' ?>">Down</span>
+      class="btn btn-mini attitude-btn <?php echo $answer['downByMe'] ? 'btn-inverse' : '' ?>"
+      data-action="<?php echo $answer['downByMe'] ? 'cancel' : 'down' ?>">Down</span>
   <?php endif ?>
 <?php endif ?>
-<span><?php echo $answer->goodCount ?> people upvote</span>
-<?php if ($answer->goodCount): ?>
+<span><?php echo $answer['good_count'] ?> people upvote</span>
+<?php if ($answer['good_count']): ?>
   <ul class="inline">
-    <?php foreach ($answer->goods as $at): ?>
-      <li><a href="/people/"><?php echo $at->user()->name ?></a></li>
+    <?php foreach ($answer['goods'] as $at): ?>
+      <li><a href="/people/"><?php echo $at['user']()->name ?></a></li>
     <?php endforeach ?>
   </ul>
 <?php endif ?>

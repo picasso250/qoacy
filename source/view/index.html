@@ -2,7 +2,7 @@
 <ul>
   <?php foreach ($questions as $q): ?>
   	<li>
-      <a href="/question/<?php echo $q->id; ?>"><?php echo $q->title; ?></a>
+      <a href="/question/<?php echo $q['id']; ?>"><?php echo $q['title']; ?></a>
     </li>
   <?php endforeach ?>
 </ul>

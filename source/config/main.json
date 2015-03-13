@@ -11,7 +11,8 @@
         ["%^/register/ajax$%", "register_ajax"],
         ["%^/logout$%", "logout"],
         ["%^/question/[:id]/[:attitude]%", ["Question", "attitude"]],
-        ["%^/comment/add%", ["Question", "comment"]]
+        ["%^/comment/add%", ["Question", "comment"]],
+        ["%^/answer/(?<id>\\d+)/ajax%", "answer"]
     ],
     "db": {
       "dsn": "mysql:host=localhost;dbname=qoacy",
