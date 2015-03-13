@@ -1,0 +1,3 @@
+[submodule "PHP-tiny"]
+	path = PHP-tiny
+	url = git://gitcafe.com/picasso250/PHP-tiny.git
