@@ -57,3 +57,17 @@ function register()
 {
 	render(VIEW_ROOT.'/register.html', [], LAYOUT_PATH);
 }
+function logout()
+{
+	user_id(0);
+	redirect('/');
+}
+function search()
+{
+	$q = _get('q');
+	if ($q)
+		$questions = Service('db')->queryAll('SELECT * from question where title like ? limit 100', ["%$q%"]);
+	else
+		$questions = array();
+    render(VIEW_ROOT.'/search.html', compact('q', 'questions'), LAYOUT_PATH);
+}

@@ -1,9 +1,3 @@
-<?php
-!defined('IN_APP') && exit('ILLEGAL EXECUTION');
-/**
- * @author  ryan <cumt.xiaochi@gmail.com>
- */
-?>
 <div>search result for <?php echo htmlspecialchars($q); ?></div>
 <ul>
 	<?php foreach ($questions as $question): ?>
@@ -14,7 +8,7 @@
 	<?php endforeach ?>
 </ul>
 <h1>ask a question</h1>
-<form action="/ask_question" method="post" class="">
+<form action="/ask" method="get" class="">
 	<input name="title" type="text" value="<?php echo $q ?>">
     <button class="btn" type="submit">Ask</button>
 </form>

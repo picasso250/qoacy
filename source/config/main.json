@@ -1,7 +1,7 @@
 {
     "routers": [
         ["%^/$%", "index_GET"],
-        ["%^/search%", ["Index", "search"]],
+        ["%^/search$%", "search"],
         ["%^/ask%", ["Question", "ask"]],
         ["%^/question/[:id]%", ["Question", "view"]],
         ["%^/question/[:id]/answer%", ["Question", "answer"]],
@@ -9,7 +9,7 @@
         ["%^/login/ajax$%", "login_ajax"],
         ["%^/register$%", "register"],
         ["%^/register/ajax$%", "register_ajax"],
-        ["%^/logout%", ["Account", "logout"]],
+        ["%^/logout$%", "logout"],
         ["%^/question/[:id]/[:attitude]%", ["Question", "attitude"]],
         ["%^/comment/add%", ["Question", "comment"]]
     ],
