@@ -5,20 +5,16 @@
  * app logic
  */
 
-use ptf\Application;
-use ptf\PdoWrapper;
-
-include __DIR__.'/autoload.php';
+include __DIR__.'/vendor/autoload.php';
 
 date_default_timezone_set('PRC');
 
-$app = new Application;
-$app->root = __DIR__;
 $config = array_merge(
-    require __DIR__.'/config/config.php',
-    require __DIR__.'/config/config.'.DEPLOY_ENV.'.php'
+	json_decode(file_get_contents(__DIR__.'/config/main.json')),
+	json_decode(file_get_contents(__DIR__.'/config/env.json'))
 );
-PdoWrapper::config($config['db']);
-$app->config($config);
-$app->run();
+Service('config', $config);
+$dbc = $config['db'];
+Service('db', new DB($dbc['dsn'], $dbc['username'], $dbc['password']));
 
+run($config['routers']);

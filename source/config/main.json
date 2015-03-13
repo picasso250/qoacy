@@ -1,5 +1,5 @@
 {
-    "routers" => [
+    "routers": [
         ["GET", "/", ["Index", "index"]],
         ["GET", "/search", ["Index", "search"]],
         ["POST", "/ask", ["Question", "ask"]],
