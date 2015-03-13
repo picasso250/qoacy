@@ -1,12 +1,10 @@
-<form action="<?= ROOT ?>login" method="post" class="form-horizontal">
-  <?php if (isset($msg) && $msg): ?>
-    <div class="alert alert-error"><?= $msg ?></div>
-  <?php endif ?>
+<form action="<?= ROOT ?>login/ajax" role="post" method="post" class="form-horizontal">
+  <div class="alert alert-error"></div>
   <input type="hidden" name="back" value="<?= _req('back') ?>">
   <div class="control-group">
     <label class="control-label" for="inputUsername">邮箱：</label>
     <div class="controls">
-      <input type="text" name="username" id="inputUsername" placeholder="" value="<?= isset($username) ? $username : '' ?>" class="required email">
+      <input type="email" name="email" id="inputUsername" placeholder="" class="required email">
     </div>
   </div>
   <div class="control-group">

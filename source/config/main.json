@@ -5,8 +5,10 @@
         ["%^/ask%", ["Question", "ask"]],
         ["%^/question/[:id]%", ["Question", "view"]],
         ["%^/question/[:id]/answer%", ["Question", "answer"]],
-        ["%^/login%", "login"],
-        ["%^/register%", ["Account", "register"]],
+        ["%^/login$%", "login"],
+        ["%^/login/ajax$%", "login_ajax"],
+        ["%^/register$%", "register"],
+        ["%^/register/ajax$%", "register_ajax"],
         ["%^/logout%", ["Account", "logout"]],
         ["%^/question/[:id]/[:attitude]%", ["Question", "attitude"]],
         ["%^/comment/add%", ["Question", "comment"]]
